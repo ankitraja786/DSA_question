@@ -1,0 +1,21 @@
+class Solution {
+    
+    public String reverse(String S){
+        //code here
+        int len = S.length();
+        char[]ch = S.toCharArray();
+        Stack<Character>St = new Stack<>();
+        for(int i=0;i<len;i++)
+        {
+            St.push(ch[i]);
+        }
+         for(int i=0;i<len;i++)
+         {
+             char x =St.pop();
+             ch[i]=x;
+         }
+            S=String.copyValueOf(ch);
+          return S;
+    }
+
+}
