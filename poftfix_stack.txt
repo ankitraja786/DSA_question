@@ -1,0 +1,29 @@
+  Stack<Integer> stack =new Stack<>();
+        int n1=0,n2=0;
+        for(int i=0;i<exp.length();i++)
+        {
+            char ch = exp.charAt(i);
+            if(ch=='+'||ch=='-'||ch=='*'||ch=='/')
+            {
+                n1 = stack.pop();
+                n2 = stack.pop();
+                
+                if(ch=='+')
+                stack.push(n2+n1);
+                else if(ch=='-')
+                stack.push(n2-n1);
+                else if(ch=='*')
+                stack.push(n2*n1);
+                else
+                stack.push(n2/n1);
+            }
+            else
+            {
+                stack.push(Integer.parseInt(ch+""));
+            }
+        }
+        return stack.pop();
+    }
+    
+}
+    
