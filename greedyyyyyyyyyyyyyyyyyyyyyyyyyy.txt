@@ -1,0 +1,29 @@
+#Greedy Problem/
+
+
+
+Example 1 : Consider the following 3 activities sorted by
+by finish time.
+     start[]  =  {10, 12, 20};
+     finish[] =  {20, 25, 30};
+A person can perform at most two activities. The 
+maximum set of activities that can be executed 
+is {0, 2} [ These are indexes in start[] and 
+finish[] 
+
+
+
+
+
+
+/*package whatever //do not write package name here */
+import  java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class ActivitySelection{
+    public static void printMaxActivites(int s[],int f[], int n)
+    {
+        int i,j;
+        System.out.print("Following activity are selection :n");
+        i=0;
