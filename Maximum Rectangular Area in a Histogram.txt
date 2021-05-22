@@ -1,0 +1,59 @@
+class Solution
+{
+    //Function to find largest rectangular area possible in a given histogram.
+    public static long getMaxArea(long hist[], long n) 
+    { 
+        //creating an empty stack. The stack holds indexes of hist[] array.
+        //bars stored in stack are always in increasing order of their heights.
+        Stack<Long> s = new Stack<Long>(); 
+        
+        long max_area = 0, area_with_top; 
+        long tp=0, i = 0;
+        
+        //traversing the array.
+        while (i < n) 
+        { 
+            //if current bar is greater than or equal to bar on top 
+            //of stack, we push the index into stack.
+            if(!s.empty())tp=s.peek();
+            if (s.empty() || hist[(int)tp] <= hist[(int)i]) {
+                s.push(i++); 
+            }
+            
+            //if current bar is lower than bar on top of stack, we calculate
+            //area of rectangle with top of stack as the smallest bar.  
+            //i is rightindex for top and element before top in stack is leftindex
+            else 
+            { 
+                tp = s.peek();
+                //popping the top element of stack.
+                s.pop(); 
+                
+                //calculating the area with hist[tp] stack as smallest bar.
+                area_with_top=hist[(int)tp]*(s.empty() ? i : i-s.peek()-1); 
+                
+                //updating maximum area, if needed.
+                if(max_area < area_with_top) 
+                    max_area = area_with_top; 
+            } 
+        } 
+        
+        //now popping the remaining bars from stack and calculating 
+        //area with every popped bar as the smallest bar.
+        while (s.empty() == false) 
+        { 
+            tp = s.peek(); 
+            s.pop(); 
+            area_with_top=hist[(int)tp]*(s.empty()? i : i-s.peek()-1); 
+            
+            //updating maximum area, if needed.
+            if (max_area < area_with_top) 
+                max_area = area_with_top; 
+        } 
+        //returning the maximum area.
+        return max_area; 
+    } 
+    
+}
+
+
