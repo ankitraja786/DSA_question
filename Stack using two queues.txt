@@ -1,0 +1,59 @@
+
+class Queues
+{
+	Queue<Integer> q1 = new LinkedList<Integer>();
+	Queue<Integer> q2 = new LinkedList<Integer>();
+	
+	//Function to push an element into stack using two queues.
+	void push(int a)
+	{
+		//while first queue is not empty, we keep popping the front element
+        //from first queue and storing that element in second queue.
+		while(!q1.isEmpty())
+		{
+			int k = q1.peek();
+			
+			//popping element from first queue.
+			q1.remove();
+			
+			//pushing it into second queue.
+			q2.add(k);
+		}
+		
+		//q1 is empty now and we push the given number into first queue.
+		q1.add(a);
+		
+		//while second queue is not empty, we keep popping the front element
+        //from second queue and storing that element in first queue.
+		while(!q2.isEmpty())
+		{
+			int k = q2.peek();
+			//popping element from second queue.
+			q2.remove();
+			
+			//pushing it into first queue.
+			q1.add(k);
+			
+		}
+	}
+	
+	//Function to pop an element from stack using two queues. 
+	int pop()
+	{
+	    //if first queue is not empty, then we can pop an element.
+		if(!q1.isEmpty())
+		{
+		    //we store the front element from the queue in a 
+            //variable and pop that element.
+			int r = q1.peek();
+			q1.remove();
+			
+			//returning the popped element.
+			return r;
+		}
+		//else we return -1.
+		return -1;
+	}
+	
+}
+
