@@ -1,0 +1,105 @@
+Given an array, print the Next Smaller Element (NSE) for every element. The Smaller smaller Element for an element x is the first smaller element on the right side of x in array. Elements for which no smaller element exist (on right side), consider next smaller element as -1. 
+Examples: 
+a) For any array, rightmost element always has next smaller element as -1. 
+b) For an array which is sorted in increasing order, all elements have next smaller element as -1. 
+c) For the input array [4, 8, 5, 2, 25}, the next smaller elements for each element are as follows.
+
+Element       NSE
+   4      -->   2
+   8      -->   5
+   5      -->   2
+   2      -->   -1
+   25     -->  -1
+
+
+
+class Main {
+    /* prints element and NSE pair for
+     all elements of arr[] of size n */
+    static void printNSE(int arr[], int n)
+    {
+        int next, i, j;
+        for (i = 0; i < n; i++) {
+            next = -1;
+            for (j = i + 1; j < n; j++) {
+                if (arr[i] > arr[j]) {
+                    next = arr[j];
+                    break;
+                }
+            }
+            System.out.println(arr[i] + " -- " + next);
+        }
+    }
+ 
+    public static void main(String args[])
+    {
+        int arr[] = { 11, 13, 21, 3 };
+        int n = arr.length;
+        printNSE(arr, n);
+    }
+}
+
+_____________________________________________________________________________
+
+
+
+
+
+
+// smaller element for all array elements.
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+ 
+class GFG
+{
+    /* prints element and NSE pair for all
+    elements of arr[] of size n */
+    public static void printNSE(int arr[], int n)
+    {
+        Stack<Integer> s = new Stack<Integer>();
+         
+        /* push the first element to stack */
+        s.push(arr[0]);
+         
+        // iterate for rest of the elements
+        for (int i = 1; i < n; i++) {
+ 
+        if (s.empty()) {
+            s.push(arr[i]);
+            continue;
+        }
+     
+         
+        /* if stack is not empty, then
+        pop an element from stack.
+        If the popped element is greater
+        than next, then
+        a) print the pair
+        b) keep popping while elements are
+        greater and stack is not empty */
+    while (s.empty() == false && s.peek() > arr[i]) {
+            System.out.println(s.peek() + " --> " + arr[i]);
+            s.pop();
+        }
+         
+        /* push next to stack so that we can find
+        next smaller for it */
+        s.push(arr[i]);
+        }
+         
+        /* After iterating over the loop, the remaining
+        elements in stack do not have the next smaller
+        element, so print -1 for them */
+            while (s.empty() == false) {
+        System.out.println(s.peek() + " --> " + "-1");
+        s.pop();
+        }
+    }
+    /* Driver program to test above functions */
+    public static void main (String[] args) {
+        int arr[] = { 11, 13, 21, 3};
+        int n = arr.length;
+        printNSE(arr, n);
+    }
+}
